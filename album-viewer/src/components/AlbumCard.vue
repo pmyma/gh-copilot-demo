@@ -21,14 +21,17 @@
     </div>
     
     <div class="album-actions">
-      <button class="btn btn-primary">Add to Cart</button>
-      <button class="btn btn-secondary">Preview</button>
+      <button class="btn btn-primary">{{ t.albumCard.addToCart }}</button>
+      <button class="btn btn-secondary">{{ t.albumCard.preview }}</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from '../composables/useI18n'
 import type { Album } from '../types/album'
+
+const { t } = useI18n()
 
 interface Props {
   album: Album
