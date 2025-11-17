@@ -1,5 +1,10 @@
 {
   "dependencies": {
     "mocha": "^11.7.5"
+  },
+  "scripts": {
+    "test:api-v2": "cd album-api-v2 && npm test",
+    "build:api-v2": "cd album-api-v2 && npm run build",
+    "dev:api-v2": "cd album-api-v2 && npm run dev"
   }
 }
