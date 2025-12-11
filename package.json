@@ -5,6 +5,29 @@
   "scripts": {
     "test:api-v2": "cd album-api-v2 && npm test",
     "build:api-v2": "cd album-api-v2 && npm run build",
-    "dev:api-v2": "cd album-api-v2 && npm run dev"
-  }
+    "dev:api-v2": "cd album-api-v2 && npm run dev",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug"
+  },
+  "name": "gh-copilot-demo",
+  "version": "1.0.0",
+  "description": "<br/>",
+  "main": "run-tests.js",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "playwright": "^1.56.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmyma/gh-copilot-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/pmyma/gh-copilot-demo/issues"
+  },
+  "homepage": "https://github.com/pmyma/gh-copilot-demo#readme"
 }

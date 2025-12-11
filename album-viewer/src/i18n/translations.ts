@@ -12,6 +12,19 @@ export interface Translations {
     addToCart: string
     preview: string
   }
+  cart: {
+    title: string
+    empty: string
+    item: string
+    items: string
+    total: string
+    clear: string
+    checkout: string
+    close: string
+    clearAll: string
+    addToCart: string
+    removeFromCart: string
+  }
   language: {
     select: string
     en: string
@@ -35,6 +48,19 @@ export const translations: Record<string, Translations> = {
       addToCart: 'Add to Cart',
       preview: 'Preview'
     },
+    cart: {
+      title: 'Shopping Cart',
+      empty: 'Your cart is empty',
+      item: 'item',
+      items: 'items',
+      total: 'Total',
+      clear: 'Clear Cart',
+      checkout: 'Checkout',
+      close: 'Close cart',
+      clearAll: 'Clear all items from cart',
+      addToCart: 'Add to cart',
+      removeFromCart: 'Remove from cart'
+    },
     language: {
       select: 'Language',
       en: 'English',
@@ -56,6 +82,19 @@ export const translations: Record<string, Translations> = {
       addToCart: 'Ajouter au Panier',
       preview: 'Aperçu'
     },
+    cart: {
+      title: 'Panier d\'Achats',
+      empty: 'Votre panier est vide',
+      item: 'article',
+      items: 'articles',
+      total: 'Total',
+      clear: 'Vider le Panier',
+      checkout: 'Commander',
+      close: 'Fermer le panier',
+      clearAll: 'Vider tous les articles du panier',
+      addToCart: 'Ajouter au panier',
+      removeFromCart: 'Retirer du panier'
+    },
     language: {
       select: 'Langue',
       en: 'Anglais',
@@ -76,6 +115,19 @@ export const translations: Record<string, Translations> = {
     albumCard: {
       addToCart: 'In den Warenkorb',
       preview: 'Vorschau'
+    },
+    cart: {
+      title: 'Warenkorb',
+      empty: 'Ihr Warenkorb ist leer',
+      item: 'Artikel',
+      items: 'Artikel',
+      total: 'Gesamt',
+      clear: 'Warenkorb leeren',
+      checkout: 'Zur Kasse',
+      close: 'Warenkorb schließen',
+      clearAll: 'Alle Artikel aus dem Warenkorb entfernen',
+      addToCart: 'In den Warenkorb',
+      removeFromCart: 'Aus dem Warenkorb entfernen'
     },
     language: {
       select: 'Sprache',

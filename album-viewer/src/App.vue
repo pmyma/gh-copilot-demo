@@ -6,7 +6,10 @@
           <h1>{{ t.header.title }}</h1>
           <p>{{ t.header.subtitle }}</p>
         </div>
-        <LanguageSelector />
+        <div class="header-actions">
+          <LanguageSelector />
+          <CartIcon />
+        </div>
       </div>
     </header>
 
@@ -29,6 +32,9 @@
         />
       </div>
     </main>
+
+    <!-- Cart Dropdown -->
+    <CartDropdown />
   </div>
 </template>
 
@@ -37,6 +43,8 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import AlbumCard from './components/AlbumCard.vue'
 import LanguageSelector from './components/LanguageSelector.vue'
+import CartIcon from './components/CartIcon.vue'
+import CartDropdown from './components/CartDropdown.vue'
 import { useI18n } from './composables/useI18n'
 import type { Album } from './types/album'
 
@@ -88,6 +96,12 @@ onMounted(() => {
 .header-text {
   text-align: center;
   flex: 1;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .header h1 {

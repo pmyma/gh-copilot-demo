@@ -21,23 +21,60 @@
     </div>
     
     <div class="album-actions">
-      <button class="btn btn-primary">{{ t.albumCard.addToCart }}</button>
+      <button 
+        @click="handleAddToCart" 
+        class="btn btn-primary"
+        :class="{ 'added': isInCartState }"
+        :disabled="addToCartLoading"
+      >
+        <span v-if="!addToCartLoading">
+          {{ isInCartState ? `${t.cart.addToCart} (${getItemQuantity(album.id)})` : t.albumCard.addToCart }}
+        </span>
+        <span v-else class="loading-spinner"></span>
+      </button>
       <button class="btn btn-secondary">{{ t.albumCard.preview }}</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useI18n } from '../composables/useI18n'
+import { useCart } from '../composables/useCart'
 import type { Album } from '../types/album'
 
 const { t } = useI18n()
+const { addToCart, isInCart, getItemQuantity } = useCart()
 
 interface Props {
   album: Album
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+const addToCartLoading = ref(false)
+const isInCartState = ref(isInCart(props.album.id))
+
+const handleAddToCart = async (): Promise<void> => {
+  if (addToCartLoading.value) return
+  
+  addToCartLoading.value = true
+  
+  try {
+    // Add visual feedback delay
+    await new Promise(resolve => setTimeout(resolve, 300))
+    
+    addToCart(props.album)
+    isInCartState.value = isInCart(props.album.id)
+    
+    // Brief success animation delay
+    await new Promise(resolve => setTimeout(resolve, 200))
+  } catch (error) {
+    console.error('Failed to add item to cart:', error)
+  } finally {
+    addToCartLoading.value = false
+  }
+}
 
 const handleImageError = (event: Event): void => {
   const target = event.target as HTMLImageElement
@@ -161,13 +198,54 @@ const handleImageError = (event: Event): void => {
 }
 
 .btn-primary {
-  background: #667eea;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
 }
 
 .btn-primary:hover {
-  background: #5a6fd8;
+  background: linear-gradient(135deg, #5a67d8 0%, #6b5b95 100%);
   transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary.added {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  animation: addedPulse 0.6s ease-out;
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes addedPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(72, 187, 120, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .btn-secondary {
